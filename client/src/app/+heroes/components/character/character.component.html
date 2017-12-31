@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ character.name }}</mat-card-title>
+  </mat-card-header>
+  <div [ngStyle]="{ 'background-image': 'url(' + getLandscapeXlargeImage(character.thumbnail) + ')' }" mat-card-image></div>
+  <mat-card-content>
+    <p *ngIf="character.description.length > 0">{{ character.description }}</p>
+  </mat-card-content>
+</mat-card>

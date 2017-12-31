@@ -1,0 +1,19 @@
+{
+  "heroes": [
+    { "id": 1, "characterId": 1009610, "name": "Spider-Man", "powers": [1, 2, 3] },
+    { "id": 2, "characterId": 1010338, "name": "Captain Marvel", "powers": [1, 4, 5, 6] },
+    { "id": 3, "characterId": 1009351, "name": "Hulk", "powers": [1] },
+    { "id": 4, "characterId": 1009664, "name": "Thor", "powers": [1, 7, 8] },
+    { "id": 5, "characterId": 1009368, "name": "Iron Man", "powers": [] }
+  ],
+  "powers": [
+    { "id": 1, "name": "strength" },
+    { "id": 2, "name": "cling" },
+    { "id": 3, "name": "agility" },
+    { "id": 4, "name": "flight" },
+    { "id": 5, "name": "durability" },
+    { "id": 6, "name": "energy" },
+    { "id": 7, "name": "endurance" },
+    { "id": 8, "name": "resistance" }
+  ]
+}

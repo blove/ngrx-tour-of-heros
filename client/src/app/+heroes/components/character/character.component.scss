@@ -1,0 +1,11 @@
+:host {
+  mat-card {
+    margin-bottom: 15px;
+
+    [mat-card-image] {
+      height: 400px;
+      background-size: cover;
+      background-position: center center;
+    }
+  }
+}

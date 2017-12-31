@@ -1,0 +1,20 @@
+:host {
+  mat-toolbar {
+    margin-bottom: 15px;
+
+    mat-icon {
+      cursor: pointer;
+      padding: 0 15px;
+    }
+  }
+}
+
+mat-drawer {
+  mat-list {
+    mat-list-item {
+      button {
+        width: 100px;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+:host {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+
+    @media screen and (max-width: 599px) {
+      grid-template-columns: 1fr;
+    }
+    @media screen and (min-width: 600px) and (max-width: 959px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}

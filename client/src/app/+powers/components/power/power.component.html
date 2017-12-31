@@ -1,0 +1,8 @@
+<mat-list-item fxLayout="row">
+  <div fxFlex>
+    <a [routerLink]="['/powers', power.id]">{{ power.name }}</a>
+  </div>
+  <div class="actions">
+    <mat-icon>delete</mat-icon>
+  </div>
+</mat-list-item>

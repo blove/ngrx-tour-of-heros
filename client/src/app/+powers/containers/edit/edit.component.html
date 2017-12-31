@@ -1,0 +1,6 @@
+<app-layout>
+  <app-edit-power
+    [power]="power | async"
+    (updateChange)="update($event)">
+  </app-edit-power>
+</app-layout>
