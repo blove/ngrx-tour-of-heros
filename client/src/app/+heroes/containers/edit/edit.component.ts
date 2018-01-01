@@ -29,10 +29,15 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.hero = this.activatedRoute.paramMap
-      .pipe(
-        switchMap(params => this.heroesService.getHero(params.get('id')))
-      );
+    // TODO: use switchMap operator
+    this.activatedRoute.paramMap
+      .subscribe(params => this.hero = this.heroesService.getHero(params.get('id')));
+
+    // this.hero = this.activatedRoute.paramMap
+    //   .pipe(
+    //     switchMap(params => this.heroesService.getHero(params.get('id')))
+    //   );
+
     this.powers = this.powersService.getPowers();
   }
 

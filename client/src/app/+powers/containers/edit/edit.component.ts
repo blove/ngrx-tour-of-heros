@@ -26,10 +26,14 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     // TODO: dispatch action to load power
-    this.power = this.activatedRoute.paramMap
-      .pipe(
-        switchMap(paramMap => this.powersService.getPower(paramMap.get('id')))
-      );
+    // TODO: use switchMap operator
+    this.activatedRoute.paramMap
+      .subscribe(paramMap => this.power = this.powersService.getPower(paramMap.get('id')));
+
+    // this.power = this.activatedRoute.paramMap
+    //   .pipe(
+    //     switchMap(paramMap => this.powersService.getPower(paramMap.get('id')))
+    //   );
   }
 
   powerChange(power: Power) {
