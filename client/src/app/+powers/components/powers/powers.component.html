@@ -1,3 +1,17 @@
-<mat-list>
-  <app-power *ngFor="let power of powers" [power]="power"></app-power>
-</mat-list>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title><h2>Super Powers</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let power of powers"  fxLayout="row">
+        <div fxFlex>
+          <a [routerLink]="['/powers', power.id]">{{ power.name }}</a>
+        </div>
+        <div class="actions">
+          <mat-icon (click)="delete.emit(power)">delete</mat-icon>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

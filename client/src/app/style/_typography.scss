@@ -1,0 +1,9 @@
+@import "~@angular/material/theming";
+
+h1 {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  border-bottom: 2px solid mat-color($mat-deep-orange, A200);
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}

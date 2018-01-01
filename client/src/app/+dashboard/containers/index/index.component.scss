@@ -4,6 +4,14 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 15px;
 
+    mat-card {
+      mat-card-header {
+        h4 {
+          margin: 0;
+        }
+      }
+    }
+
     @media screen and (max-width: 599px) {
       grid-template-columns: 1fr;
     }

@@ -1,0 +1,7 @@
+<app-layout>
+  <app-edit-hero
+    [hero]="hero | async"
+    [powers]="powers | async"
+    (heroChange)="heroChange($event)">
+  </app-edit-hero>
+</app-layout>

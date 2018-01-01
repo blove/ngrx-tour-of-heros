@@ -1,3 +1,9 @@
 <app-layout>
-  <app-characters [characters]="characters"></app-characters>
+  <div fxLayout="row" fxLayoutAlign="end center" class="actions">
+    <button app-icon-button (click)="add()">
+      <mat-icon>add_circle_outline</mat-icon>
+      Add Hero
+    </button>
+  </div>
+  <app-heroes [heroes]="heroes | async" (delete)="delete($event)"></app-heroes>
 </app-layout>

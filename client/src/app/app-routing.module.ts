@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { NotFoundComponent } from "./shared/containers/not-found/not-found.component";
+
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +20,10 @@ const routes: Routes = [
   {
     path: 'powers',
     loadChildren: 'app/+powers/powers.module#PowersModule'
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 

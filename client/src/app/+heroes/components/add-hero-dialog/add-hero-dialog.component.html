@@ -1,0 +1,27 @@
+<app-dialog-header (close)="close()">
+  <h3>Add Super Hero</h3>
+</app-dialog-header>
+<form [formGroup]="form" (submit)="save()">
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayCharacterAutocomplete" (optionSelected)="characterSelected($event)">
+        <mat-option *ngFor="let character of filteredCharacters | async" [value]="character">
+          {{ character.name }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="form.get('name').invalid">Super heroes all have names!</mat-error>
+    </mat-form-field>
+    <h4>Super Hero Powers</h4>
+    <mat-chip-list>
+      <mat-chip
+        *ngFor="let power of powers" [class.selected]="selectedPowers.indexOf(power) > -1"
+        (click)="togglePower(power)">
+        {{ power.name }}
+      </mat-chip>
+    </mat-chip-list>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

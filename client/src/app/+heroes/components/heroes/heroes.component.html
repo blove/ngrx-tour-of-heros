@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-header>
+    <h3>Super Heroes</h3>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let hero of heroes">
+        <div fxFlex>
+          <a [routerLink]="['/heroes', hero.id]">{{ hero.character.name }}</a>
+        </div>
+        <div class="actions">
+          <mat-icon (click)="delete.emit(hero)">delete</mat-icon>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

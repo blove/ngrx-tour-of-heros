@@ -1,8 +1,8 @@
-import { Power } from "./power.model";
+import { Character } from "./character.model";
 
 export interface Hero {
   id: number;
-  characterId: number;
+  character: Character;
   name: string;
-  powers: Power[];
+  powers: number[];
 }

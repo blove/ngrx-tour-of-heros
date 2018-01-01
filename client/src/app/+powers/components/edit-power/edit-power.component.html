@@ -1,12 +1,12 @@
 <form [formGroup]="form">
   <mat-card>
+    <mat-card-header>
+      <mat-card-title><h3>{{ power?.name }}</h3></mat-card-title>
+    </mat-card-header>
     <mat-card-content>
       <mat-form-field>
         <input matInput formControlName="name" placeholder="Power Name">
       </mat-form-field>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="updateChange.emit(power)">Save</button>
-    </mat-card-actions>
   </mat-card>
 </form>

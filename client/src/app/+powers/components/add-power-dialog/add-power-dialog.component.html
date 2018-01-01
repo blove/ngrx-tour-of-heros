@@ -1,0 +1,13 @@
+<app-dialog-header (close)="close()">
+  <h3>Add Super Power</h3>
+</app-dialog-header>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <input matInput placeholder="Power" formControlName="name">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="save()">Save</button>
+</mat-dialog-actions>

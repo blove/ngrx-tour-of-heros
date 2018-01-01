@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Power } from "../../../core/models/power.model";
 
@@ -7,13 +7,13 @@ import { Power } from "../../../core/models/power.model";
   templateUrl: './powers.component.html',
   styleUrls: ['./powers.component.scss']
 })
-export class PowersComponent implements OnInit {
+export class PowersComponent {
+
+  @Output() delete = new EventEmitter<Power>();
 
   @Input() powers: Power[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
   }
 
 }

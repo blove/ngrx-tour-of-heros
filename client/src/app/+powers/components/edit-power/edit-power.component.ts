@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { Power } from "../../../core/models/power.model";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-power',
@@ -10,17 +11,19 @@ import { Power } from "../../../core/models/power.model";
 })
 export class EditPowerComponent implements OnChanges, OnInit {
 
+  form: FormGroup;
+
   @Input() power: Power;
 
-  @Output() updateChange = new EventEmitter<Power>();
-
-  form: FormGroup;
+  @Output() powerChange = new EventEmitter<Power>();
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnChanges() {
     if (this.power) {
-      this.form.patchValue(this.power);
+      this.form.patchValue(this.power, {
+        emitEvent: false
+      });
     }
   }
 
@@ -28,6 +31,19 @@ export class EditPowerComponent implements OnChanges, OnInit {
     this.form = this.formBuilder.group({
       name: ['', Validators.required]
     });
+    this.form.valueChanges
+      .pipe(
+        debounceTime(500)
+      )
+      .subscribe(value => {
+        if (!this.form.valid) {
+          return;
+        }
+        this.powerChange.emit({
+          ...this.power,
+          ...value
+        });
+      });
   }
 
 }

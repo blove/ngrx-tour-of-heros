@@ -1,0 +1,22 @@
+@import "~@angular/material/theming";
+
+[app-icon-button] {
+  background: none;
+  border: 2px solid #000;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  padding: 15px;
+
+  &:hover {
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+  }
+
+  mat-icon {
+    margin-right: 15px;
+  }
+}

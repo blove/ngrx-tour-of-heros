@@ -1,0 +1,17 @@
+@import "~@angular/material/theming";
+
+:host {
+  mat-chip-list {
+    mat-chip {
+      margin: 0 5px 15px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.selected {
+        background-color: mat-color($mat-deep-orange, 500);
+      }
+    }
+  }
+}

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from "@angular/material";
+
+import { Observable } from "rxjs/Observable";
 
 import { HeroesService } from "../../../core/services/heroes.service";
-import { Character } from "../../../core/models/character.model";
-import { CharactersService } from "../../../core/services/characters.service";
+import { Hero } from "../../../core/models/hero.model";
+import { AddHeroDialogComponent } from "../../components/add-hero-dialog/add-hero-dialog.component";
 
 @Component({
   selector: 'app-index',
@@ -11,24 +14,26 @@ import { CharactersService } from "../../../core/services/characters.service";
 })
 export class IndexComponent implements OnInit {
 
-  characters: Array<Character> = [];
+  heroes: Observable<Array<Hero>>;
 
-  constructor(private characterService: CharactersService, private heroesService: HeroesService) {
+  //TODO: use store instead of service
+  constructor(private heroesService: HeroesService, private matDialog: MatDialog) {
   }
 
   ngOnInit() {
-    // fetch heroes
-    const heroes = this.heroesService.getHeroes();
+    // TODO: dispatch action to store
+    this.heroes = this.heroesService.getHeroes();
+  }
 
-    // fetch characters
-    heroes.subscribe(heroes => {
-      heroes.forEach(hero => {
-        this.characterService.getCharacter(hero.characterId).subscribe(response => {
-          const character = response.data.results[0];
-          this.characters.push(character);
-        });
-      });
-    });
+  add() {
+    this.matDialog.open(AddHeroDialogComponent);
+  }
+
+  delete(hero: Hero) {
+    // TODO: dispatch action to store
+    // TODO: use store for emitting update to the array of heroes
+    this.heroesService.deleteHero(hero)
+      .subscribe(() => this.heroes = this.heroesService.getHeroes());
   }
 
 }

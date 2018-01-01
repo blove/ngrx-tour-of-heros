@@ -1,0 +1,21 @@
+<div *ngIf="power && heroes">
+  <div fxLayout="row" fxLayoutAlign="end center" class="actions">
+    <button app-icon-button [routerLink]="['/powers', power.id, 'edit']">Edit</button>
+  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h3>{{ power.name }}</h3></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="heroes.length > 0">
+        <h4>Heroes</h4>
+        <ul>
+          <li *ngFor="let hero of heroes">
+            <a [routerLink]="['/heroes', hero.id]">{{ hero.character.name }}</a>
+          </li>
+        </ul>
+      </div>
+      <p *ngIf="heroes.length === 0">There are no heroes associated with this power.</p>
+    </mat-card-content>
+  </mat-card>
+</div>

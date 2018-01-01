@@ -1,0 +1,21 @@
+@import "~@angular/material/theming";
+
+mat-card {
+  padding: 0 !important;
+
+  mat-card-header {
+    padding: 15px 24px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+  }
+
+  [mat-card-image] {
+    margin: 0 0 16px;
+    width: 100%;
+  }
+
+  mat-card-content, mat-card-actions {
+    padding: 15px 24px !important;
+    margin: 0 !important;
+  }
+}

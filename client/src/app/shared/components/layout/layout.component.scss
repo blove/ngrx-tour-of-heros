@@ -1,3 +1,5 @@
+@import "~@angular/material/theming";
+
 :host {
   mat-toolbar {
     margin-bottom: 15px;
@@ -14,6 +16,10 @@ mat-drawer {
     mat-list-item {
       button {
         width: 100px;
+
+        &.active {
+          background: mat-color($mat-grey, 200);
+        }
       }
     }
   }
