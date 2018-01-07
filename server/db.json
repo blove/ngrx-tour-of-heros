@@ -975,6 +975,10 @@
     {
       "name": "X-ray vision",
       "id": 9
+    },
+    {
+      "name": "bar",
+      "id": 11
     }
   ]
 }

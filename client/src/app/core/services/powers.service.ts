@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
 import { Observable } from "rxjs/Observable";
-
-import { Hero } from "../models/hero.model";
-import { BaseService } from "./base.service";
+import { of } from "rxjs/observable/of";
+import { switchMap } from "rxjs/operators";
 import { Power } from "../models/power.model";
+import { BaseService } from "./base.service";
 
 @Injectable()
 export class PowersService extends BaseService {
@@ -18,11 +18,14 @@ export class PowersService extends BaseService {
     return this.httpClient.post<Power>(`${this.BASE_URL}/powers`, power);
   }
 
-  deletePower(power: Power): Observable<void> {
-    return this.httpClient.delete<void>(`${this.BASE_URL}/powers/${power.id}`);
+  deletePower(power: Power): Observable<Power> {
+    return this.httpClient.delete(`${this.BASE_URL}/powers/${power.id}`)
+      .pipe(
+        switchMap(() => of(power))
+      );
   }
 
-  getPower(id: string): Observable<Power> {
+  getPower(id: number): Observable<Power> {
     return this.httpClient.get<Power>(`${this.BASE_URL}/powers/${id}`);
   }
 
@@ -33,4 +36,5 @@ export class PowersService extends BaseService {
   updatePower(power: Power): Observable<Power> {
     return this.httpClient.put<Power>(`${this.BASE_URL}/powers/${power.id}`, power);
   }
+
 }

@@ -7,7 +7,9 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../../environments/environment";
 import { AppEffects } from "./app.effects";
 import { appMetaReducers, appReducer } from "./app.reducer";
+import { PowersEffects } from "./powers/effects/powers";
 import { CustomSerializer } from "./shared/utils";
+import * as fromPowers from "./powers/reducers";
 
 @NgModule({
   imports: [
@@ -15,9 +17,13 @@ import { CustomSerializer } from "./shared/utils";
     StoreModule.forRoot(appReducer, {
       metaReducers: appMetaReducers
     }),
+    StoreModule.forFeature('powers', fromPowers.reducers),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
       AppEffects
+    ]),
+    EffectsModule.forFeature([
+      PowersEffects
     ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],

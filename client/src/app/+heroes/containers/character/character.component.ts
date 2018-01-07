@@ -37,7 +37,7 @@ export class CharacterComponent implements OnInit {
     this.powers = this.hero
       .pipe(
         mergeMap(hero => forkJoin(
-          hero.powers.map(power => this.powersService.getPower(power.toString()))
+          hero.powers.map(power => this.powersService.getPower(power))
         ))
       )
   }

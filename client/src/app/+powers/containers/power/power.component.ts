@@ -28,7 +28,7 @@ export class PowerComponent implements OnInit {
   ngOnInit() {
     this.power = this.activatedRoute.paramMap
       .pipe(
-        switchMap(params => this.powersService.getPower(params.get('id')))
+        switchMap(params => this.powersService.getPower(Number(params.get('id'))))
       );
 
     this.heroes = this.power

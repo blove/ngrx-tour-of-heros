@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from "@angular/material";
+import { Store } from "@ngrx/store";
 
 import { Observable } from "rxjs/Observable";
-
-import { PowersService } from "../../../core/services/powers.service";
 import { Power } from "../../../core/models/power.model";
+import { DeletePower, LoadPowers } from "../../../state/powers/actions/powers";
+import { getAllPowers, PowersState } from "../../../state/powers/reducers";
 import { AddPowerDialogComponent } from "../../components/add-power-dialog/add-power-dialog.component";
 
 @Component({
@@ -16,25 +17,21 @@ export class IndexComponent implements OnInit {
 
   powers: Observable<Array<Power>>;
 
-  // TODO: use store in place of service
-  constructor(private matDialog: MatDialog, private powersService: PowersService) { }
-
-  ngOnInit() {
-    // TODO: dispatch action to load powers
-    this.powers = this.powersService.getPowers();
+  constructor(private matDialog: MatDialog,
+              private store: Store<PowersState>) {
   }
 
-  // TODO: use store for dialog state
-  // TODO: adding power doesn't emit new value in powers observable
+  ngOnInit() {
+    this.powers = this.store.select(getAllPowers);
+    this.store.dispatch(new LoadPowers());
+  }
+
   add() {
     this.matDialog.open(AddPowerDialogComponent);
   }
 
   delete(power: Power) {
-    // TODO: don't subscribe
-    // TODO: don't reset Observable, just emit new value
-    this.powersService.deletePower(power)
-      .subscribe(() => this.powers = this.powersService.getPowers());
+    this.store.dispatch(new DeletePower(power));
   }
 
 }
