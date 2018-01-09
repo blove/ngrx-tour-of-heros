@@ -5,7 +5,7 @@
   <mat-card-content>
     <mat-list *ngIf="!loading; else spinner">
       <mat-list-item *ngFor="let power of powers"  fxLayout="row">
-        <div fxFlex>
+        <div fxFlex class="power">
           <a [routerLink]="['/powers', power.id]">{{ power.name }}</a>
         </div>
         <div class="actions">
