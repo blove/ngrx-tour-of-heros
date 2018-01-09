@@ -1,4 +1,4 @@
 export interface Power {
-  id: number;
+  id?: number;
   name: string;
 }

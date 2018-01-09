@@ -31,7 +31,7 @@ export class EditComponent implements OnInit {
   ngOnInit() {
     this.hero = this.activatedRoute.paramMap
       .pipe(
-        switchMap(params => this.heroesService.getHero(params.get('id')))
+        switchMap(params => this.heroesService.getHero(Number(params.get('id'))))
       );
     this.powers = this.powersService.getPowers();
   }

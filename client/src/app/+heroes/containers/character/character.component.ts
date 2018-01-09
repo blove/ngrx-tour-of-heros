@@ -32,7 +32,7 @@ export class CharacterComponent implements OnInit {
   ngOnInit() {
     this.hero = this.activatedRoute.paramMap
       .pipe(
-        switchMap(paramMap => this.heroesService.getHero(paramMap.get('id')))
+        switchMap(paramMap => this.heroesService.getHero(Number(paramMap.get('id'))))
       );
     this.powers = this.hero
       .pipe(

@@ -22,7 +22,7 @@ export class HeroesService extends BaseService {
     return this.httpClient.delete<void>(`${this.BASE_URL}/heroes/${hero.id}`);
   }
 
-  getHero(id: string): Observable<Hero> {
+  getHero(id: number): Observable<Hero> {
     return this.httpClient.get<Hero>(`${this.BASE_URL}/heroes/${id}`);
   }
 

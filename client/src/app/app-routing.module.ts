@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NotFoundComponent } from "./shared/containers/not-found/not-found.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: '/dashboard',

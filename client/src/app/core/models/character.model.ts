@@ -5,6 +5,7 @@ export interface Character {
   id: number;
   name: string;
   description: string;
+  modified: string;
   urls: CharacterUrl[];
   thumbnail: CharacterImage;
 }
