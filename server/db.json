@@ -973,12 +973,8 @@
       "name": "resistance"
     },
     {
-      "name": "X-ray vision",
+      "name": "X-ray Vision",
       "id": 9
-    },
-    {
-      "name": "bar",
-      "id": 11
     }
   ]
 }

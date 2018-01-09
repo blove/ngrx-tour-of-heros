@@ -1,19 +1,23 @@
-import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+import { MatDialogModule, MatSnackBarModule } from "@angular/material";
 import { EffectsModule } from "@ngrx/effects";
 import { RouterStateSerializer, StoreRouterConnectingModule } from "@ngrx/router-store";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../../environments/environment";
+import { SharedModule } from "../shared/shared.module";
 import { AppEffects } from "./app.effects";
 import { appMetaReducers, appReducer } from "./app.reducer";
 import { PowersEffects } from "./powers/effects/powers";
-import { CustomSerializer } from "./shared/utils";
 import * as fromPowers from "./powers/reducers";
+import { SnackbarEffects } from "./shared/effects/snackbar";
+import { CustomSerializer } from "./shared/utils";
 
 @NgModule({
   imports: [
-    CommonModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    SharedModule,
     StoreModule.forRoot(appReducer, {
       metaReducers: appMetaReducers
     }),
@@ -23,7 +27,8 @@ import * as fromPowers from "./powers/reducers";
       AppEffects
     ]),
     EffectsModule.forFeature([
-      PowersEffects
+      SnackbarEffects,
+      PowersEffects,
     ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],

@@ -11,6 +11,8 @@ export class PowersComponent {
 
   @Output() delete = new EventEmitter<Power>();
 
+  @Input() loading: boolean;
+
   @Input() powers: Power[];
 
   constructor() {

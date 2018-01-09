@@ -3,7 +3,7 @@
     <mat-card-title><h2>Super Powers</h2></mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <mat-list>
+    <mat-list *ngIf="!loading; else spinner">
       <mat-list-item *ngFor="let power of powers"  fxLayout="row">
         <div fxFlex>
           <a [routerLink]="['/powers', power.id]">{{ power.name }}</a>
@@ -13,5 +13,10 @@
         </div>
       </mat-list-item>
     </mat-list>
+    <ng-template #spinner>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </mat-card-content>
 </mat-card>

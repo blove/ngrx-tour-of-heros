@@ -38,3 +38,8 @@ export const getSelectedPower = createSelector(
   getSelectedPowerId,
   (entities, selectedPowerId) => selectedPowerId && entities[selectedPowerId]
 );
+
+export const isPowerLoading = createSelector(
+  getPowersEntityState,
+  fromPowers.isLoading
+);

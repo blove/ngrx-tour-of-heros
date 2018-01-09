@@ -4,6 +4,8 @@ import { createActionType } from "../../shared/utils";
 
 export const ADD_POWER = createActionType('ADD_POWER');
 export const ADD_POWER_SUCCESS = createActionType('ADD_POWER_SUCCESS');
+export const ADD_POWER_DIALOG_CLOSE = createActionType('ADD_POWER_DIALOG_CLOSE');
+export const ADD_POWER_DIALOG_OPEN = createActionType('ADD_POWER_DIALOG_OPEN');
 export const DELETE_POWER = createActionType('DELETE_POWER');
 export const DELETE_POWER_SUCCESS = createActionType('DELETE_POWER_SUCCESS');
 export const LOAD_POWERS = createActionType('LOAD_POWERS');
@@ -26,6 +28,14 @@ export class AddPowerSuccess implements Action {
 
   constructor(public payload: Power) {
   }
+}
+
+export class AddPowerDialogClose implements Action {
+  readonly type = ADD_POWER_DIALOG_CLOSE;
+}
+
+export class AddPowerDialogOpen implements Action {
+  readonly type = ADD_POWER_DIALOG_OPEN;
 }
 
 export class DeletePower implements Action {
@@ -91,6 +101,8 @@ export class UpdatePowerSuccess implements Action {
 export type PowersAction =
   AddPower
   | AddPowerSuccess
+  | AddPowerDialogClose
+  | AddPowerDialogOpen
   | DeletePower
   | DeletePowerSuccess
   | LoadPowers

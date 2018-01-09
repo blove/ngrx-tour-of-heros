@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from "@angular/material";
 import { Store } from "@ngrx/store";
 
 import { Observable } from "rxjs/Observable";
 import { Power } from "../../../core/models/power.model";
-import { DeletePower, LoadPowers } from "../../../state/powers/actions/powers";
-import { getAllPowers, PowersState } from "../../../state/powers/reducers";
-import { AddPowerDialogComponent } from "../../components/add-power-dialog/add-power-dialog.component";
+import { AddPowerDialogOpen, DeletePower, LoadPowers } from "../../../state/powers/actions/powers";
+import { getAllPowers, isPowerLoading, PowersState } from "../../../state/powers/reducers";
 
 @Component({
   selector: 'app-index',
@@ -15,19 +13,21 @@ import { AddPowerDialogComponent } from "../../components/add-power-dialog/add-p
 })
 export class IndexComponent implements OnInit {
 
+  loading: Observable<boolean>;
+
   powers: Observable<Array<Power>>;
 
-  constructor(private matDialog: MatDialog,
-              private store: Store<PowersState>) {
+  constructor(private store: Store<PowersState>) {
   }
 
   ngOnInit() {
+    this.loading = this.store.select(isPowerLoading);
     this.powers = this.store.select(getAllPowers);
     this.store.dispatch(new LoadPowers());
   }
 
   add() {
-    this.matDialog.open(AddPowerDialogComponent);
+    this.store.dispatch(new AddPowerDialogOpen());
   }
 
   delete(power: Power) {

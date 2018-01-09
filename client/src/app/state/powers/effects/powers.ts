@@ -1,12 +1,17 @@
 import { Injectable } from "@angular/core";
+import { MatDialog } from "@angular/material";
 import { Actions, Effect } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { Observable } from "rxjs/Observable";
-import { map, switchMap } from "rxjs/operators";
+import { map, mergeMap, switchMap, tap } from "rxjs/operators";
 import { PowersService } from "../../../core/services/powers.service";
+import { AddPowerDialogComponent } from "../../../shared/dialogs/add-power-dialog/add-power-dialog.component";
+import { SnackbarOpen } from "../../shared/actions/snackbar";
 import {
-  ADD_POWER, AddPower, AddPowerSuccess, DELETE_POWER, DeletePower, DeletePowerSuccess, LOAD_POWER, LOAD_POWERS,
-  LoadPower, LoadPowers, LoadPowersSuccess, LoadPowerSuccess, UPDATE_POWER, UpdatePower, UpdatePowerSuccess
+  ADD_POWER, ADD_POWER_DIALOG_CLOSE, ADD_POWER_DIALOG_OPEN, ADD_POWER_SUCCESS, AddPower, AddPowerDialogClose,
+  AddPowerDialogOpen, AddPowerSuccess, DELETE_POWER, DeletePower, DeletePowerSuccess, LOAD_POWER, LOAD_POWERS,
+  LoadPower, LoadPowers, LoadPowersSuccess, LoadPowerSuccess, UPDATE_POWER, UPDATE_POWER_SUCCESS, UpdatePower,
+  UpdatePowerSuccess
 } from "../actions/powers";
 
 
@@ -19,6 +24,34 @@ export class PowersEffects {
       map(action => action.payload),
       switchMap(power => this.powersService.createPower(power)),
       map(power => new AddPowerSuccess(power))
+    );
+
+  @Effect()
+  addPowerSuccess: Observable<Action> = this.actions.ofType<AddPowerSuccess>(ADD_POWER_SUCCESS)
+    .pipe(
+      mergeMap(() => [
+        new SnackbarOpen({
+          message: 'Power Created',
+          action: 'Success'
+        }),
+        new AddPowerDialogClose()
+      ])
+    );
+
+  @Effect({
+    dispatch: false
+  })
+  addPowerDialogClose: Observable<any> = this.actions.ofType<AddPowerDialogClose>(ADD_POWER_DIALOG_CLOSE)
+    .pipe(
+      tap(() => this.matDialog.closeAll())
+    );
+
+  @Effect({
+    dispatch: false
+  })
+  addPowerDialogOpen: Observable<any> = this.actions.ofType<AddPowerDialogOpen>(ADD_POWER_DIALOG_OPEN)
+    .pipe(
+      tap(() => this.matDialog.open(AddPowerDialogComponent))
     );
 
   @Effect()
@@ -52,7 +85,17 @@ export class PowersEffects {
       map(power => new UpdatePowerSuccess(power))
     );
 
+  @Effect()
+  updatePowerSuccess: Observable<Action> = this.actions.ofType<UpdatePowerSuccess>(UPDATE_POWER_SUCCESS)
+    .pipe(
+      map(() => new SnackbarOpen({
+        message: 'Power Updated',
+        action: 'Success'
+      }))
+    );
+
   constructor(private actions: Actions,
+              private matDialog: MatDialog,
               private powersService: PowersService) {
   }
 
