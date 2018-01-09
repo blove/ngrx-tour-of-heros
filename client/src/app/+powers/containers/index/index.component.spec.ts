@@ -6,6 +6,7 @@ import {
 } from "@angular/material";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
+import { generatePowers } from "../../../core/models/power.model";
 import { PowersService } from "../../../core/services/powers.service";
 import { SharedModule } from "../../../shared/shared.module";
 import { StateModule } from "../../../state/state.module";
@@ -13,17 +14,15 @@ import { PowersComponent } from "../../components/powers/powers.component";
 
 import { IndexComponent } from './index.component';
 
-class Page {
-
-}
-
 describe('IndexComponent', () => {
   let component: IndexComponent;
   let fixture: ComponentFixture<IndexComponent>;
 
+  let powers = generatePowers();
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndexComponent, PowersComponent ],
+      declarations: [IndexComponent, PowersComponent],
       imports: [
         HttpClientModule,
         MatButtonModule,

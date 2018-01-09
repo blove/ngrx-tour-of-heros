@@ -1,27 +1,38 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { Location } from "@angular/common";
+import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatCardModule, MatIconModule, MatListModule, MatProgressSpinnerModule } from "@angular/material";
 import { By } from "@angular/platform-browser";
 import { RouterTestingModule } from "@angular/router/testing";
 import { generatePowers, Power } from "../../../core/models/power.model";
+import { SharedModule } from "../../../shared/shared.module";
+import { PowerComponent } from "../../containers/power/power.component";
+import { PowerDetailComponent } from "../power-detail/power-detail.component";
 import { PowersComponent } from "./powers.component";
 
 describe('PowersComponent', () => {
   let component: PowersComponent;
   let fixture: ComponentFixture<PowersComponent>;
+  let location: Location;
 
   let powers = generatePowers();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PowersComponent],
+      declarations: [PowersComponent, PowerComponent, PowerDetailComponent],
       imports: [
         FlexLayoutModule,
         MatCardModule,
         MatIconModule,
         MatListModule,
         MatProgressSpinnerModule,
-        RouterTestingModule
+        RouterTestingModule.withRoutes([
+          {
+            path: 'powers/:id',
+            component: PowerComponent,
+          }
+        ]),
+        SharedModule
       ]
     }).compileComponents()
   }));
@@ -30,6 +41,8 @@ describe('PowersComponent', () => {
     fixture = TestBed.createComponent(PowersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    location = TestBed.get(Location);
 
     component.powers = powers;
     fixture.detectChanges();
@@ -53,5 +66,17 @@ describe('PowersComponent', () => {
 
     expect(deletedPower).toEqual(powers[0]);
   });
+
+  it('should route to power', fakeAsync(() => {
+    // const spy = spyOn(router, 'navigateByUrl');
+
+    let anchor = fixture.debugElement.query(By.css('.power > a'));
+    anchor.nativeElement.click();
+
+    tick();
+
+    const id = powers[0].id;
+    expect(location.path()).toEqual(`/powers/${id}`);
+  }));
 
 });
