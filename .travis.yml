@@ -1,0 +1,19 @@
+dist: trusty
+sudo: false
+
+language: node_js
+node_js:
+  - "6"
+
+cache:
+  directories:
+     - ./client/node_modules
+
+install: true
+
+script:
+  # Use Chromium instead of Chrome.
+  - cd client && yarn install
+  - export CHROME_BIN=chromium-browser
+  - xvfb-run -a npm run test -- --single-run --no-progress --browser=ChromeNoSandbox
+  - xvfb-run -a npm run e2e -- --no-progress --config=protractor-ci.conf.js

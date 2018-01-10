@@ -5,7 +5,7 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getRouterOutlet() {
+    return element(by.css('router-outlet'));
   }
 }
