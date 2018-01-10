@@ -5,9 +5,7 @@ language: node_js
 node_js:
   - "6"
 
-yarn: true
-  directories:
-    - node_modules
+cache: yarn
 
 addons:
   chrome: stable
@@ -18,5 +16,5 @@ script:
   # Use Chromium instead of Chrome.
   - cd client && yarn install
   - export CHROME_BIN=chromium-browser
-  - xvfb-run -a yarn test -- --single-run --no-progress --browser=ChromeNoSandbox
-  - xvfb-run -a yarn e2e -- --no-progress --config=protractor-ci.conf.js
+  - xvfb-run -a yarn test --single-run --no-progress --browser=ChromeNoSandbox
+  - xvfb-run -a yarn e2e --no-progress --config=protractor-ci.conf.js
