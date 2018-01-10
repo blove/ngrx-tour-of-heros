@@ -35,3 +35,12 @@ This is one example where the use of the Redux pattern can provide consistent be
 This branch includes the first refactor of our application to implement the Redux pattern using NgRX.
 The `power` model is used throughout our application, in both the heroes module as well as in the powers module.
 As such, we implement the cross-cutting concern in the `CoreModule` of our application, which is imported into the `AppModule`.
+
+## ngrx-refactor-2
+
+This branch includes:
+
+* Refactor of the `PowersModule` to use NgRx
+* Minor updates to the UI of the application
+* Created 20 new Karma tests
+* Including .travis.yml to run our tests on Travis CI
