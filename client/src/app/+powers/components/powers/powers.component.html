@@ -9,7 +9,13 @@
           <a [routerLink]="['/powers', power.id]">{{ power.name }}</a>
         </div>
         <div class="actions">
-          <mat-icon (click)="delete.emit(power)">delete</mat-icon>
+          <button mat-icon-button [matMenuTriggerFor]="actionsMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #actionsMenu="matMenu">
+            <button mat-menu-item [routerLink]="['/powers', power.id, 'edit']">Edit</button>
+            <button mat-menu-item (click)="delete.emit(power)" class="delete">Delete</button>
+          </mat-menu>
         </div>
       </mat-list-item>
     </mat-list>

@@ -39,9 +39,9 @@ describe('HeroesService', () => {
         "id": 12345,
         "name": "Brian Love",
         "modified": "2018-02-01T00:00:00-0700",
-        "description": "Software Enginner and though leader by day, super hero by night. That's all you get to know.",
+        "description": "Software Enginner and thought leader by day, super hero by night. That's all you get to know.",
         "thumbnail": {
-          "path": "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b",
+          "path": "http://brianflove.com/images/bio/brian-love",
           "extension": "jpg"
         },
         "urls": []

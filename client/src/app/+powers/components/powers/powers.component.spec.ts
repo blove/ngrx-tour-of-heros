@@ -1,8 +1,12 @@
 import { Location } from "@angular/common";
-import { async, ComponentFixture, fakeAsync, inject, TestBed, tick } from "@angular/core/testing";
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from "@angular/core/testing";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MatCardModule, MatIconModule, MatListModule, MatProgressSpinnerModule } from "@angular/material";
+import {
+  MatCardModule, MatIconModule, MatListModule, MatMenuModule,
+  MatProgressSpinnerModule
+} from "@angular/material";
 import { By } from "@angular/platform-browser";
+import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterTestingModule } from "@angular/router/testing";
 import { generatePowers, Power } from "../../../core/models/power.model";
 import { SharedModule } from "../../../shared/shared.module";
@@ -25,7 +29,9 @@ describe('PowersComponent', () => {
         MatCardModule,
         MatIconModule,
         MatListModule,
+        MatMenuModule,
         MatProgressSpinnerModule,
+        NoopAnimationsModule,
         RouterTestingModule.withRoutes([
           {
             path: 'powers/:id',
@@ -57,12 +63,18 @@ describe('PowersComponent', () => {
     expect(firstPowerEl.nativeElement.textContent.trim()).toEqual(powers[0].name);
   });
 
-  it('should raise a delete event when clicked', () => {
+  it('should raise delete event when user clicks delete', (done) => {
     let deletedPower: Power;
-    component.delete.subscribe(power => deletedPower = power);
+    component.delete.subscribe(power => {
+      deletedPower = power;
+      done();
+    });
 
-    let firstDeleteIconEl = fixture.debugElement.query(By.css('.actions > mat-icon'));
-    firstDeleteIconEl.triggerEventHandler('click', powers[0]);
+    let menuButton = fixture.debugElement.query(By.css('.actions button'));
+    menuButton.nativeElement.click();
+
+    let deleteButton = fixture.debugElement.query(By.css('.delete'));
+    deleteButton.triggerEventHandler('click', powers[0]);
 
     expect(deletedPower).toEqual(powers[0]);
   });

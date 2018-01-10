@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 
 import { Observable } from "rxjs/Observable";
+import { of } from "rxjs/observable/of";
+import { switchMap } from "rxjs/operators";
 
 import { Hero } from "../models/hero.model";
 import { BaseService } from "./base.service";
-import { Power } from "../models/power.model";
 
 @Injectable()
 export class HeroesService extends BaseService {
@@ -18,8 +19,11 @@ export class HeroesService extends BaseService {
     return this.httpClient.post<Hero>(`${this.BASE_URL}/heroes`, hero);
   }
 
-  deleteHero(hero: Hero): Observable<void> {
-    return this.httpClient.delete<void>(`${this.BASE_URL}/heroes/${hero.id}`);
+  deleteHero(hero: Hero): Observable<Hero> {
+    return this.httpClient.delete<void>(`${this.BASE_URL}/heroes/${hero.id}`)
+      .pipe(
+        switchMap(() => of(hero))
+      );
   }
 
   getHero(id: number): Observable<Hero> {
