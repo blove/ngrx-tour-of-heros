@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+import "rxjs/add/observable/of";
 
 import { Observable } from "rxjs/Observable";
-import "rxjs/add/observable/of";
-import { filter, map, switchMap } from "rxjs/operators";
+import { map, withLatestFrom } from "rxjs/operators";
+import { Hero } from "../../../core/models/hero.model";
 
 import { Power } from "../../../core/models/power.model";
-import { PowersService } from "../../../core/services/powers.service";
-import { Hero } from "../../../core/models/hero.model";
 import { HeroesService } from "../../../core/services/heroes.service";
+import { PowersService } from "../../../core/services/powers.service";
 
 @Component({
   selector: 'app-power',
@@ -36,7 +36,7 @@ export class PowerComponent implements OnInit {
     //     switchMap(params => this.powersService.getPower(params.get('id')))
     //   );
 
-    //TODO: use switchMap and map operators
+    //TODO: use withLatestFrom operator
     this.heroesService.getHeroes()
       .subscribe(heroes => {
         this.power
@@ -47,12 +47,9 @@ export class PowerComponent implements OnInit {
 
     // this.heroes = this.power
     //   .pipe(
-    //     switchMap(power => this.heroesService.getHeroes()
-    //       .pipe(
-    //         map(heroes => heroes.filter(hero => hero.powers.indexOf(power.id) > -1))
-    //       )
-    //     )
-    //   )
+    //     withLatestFrom(this.heroesService.getHeroes()),
+    //     map(([power, heroes]) => heroes.filter(hero => hero.powers.indexOf(power.id) > -1))
+    //   );
   }
 
 }
