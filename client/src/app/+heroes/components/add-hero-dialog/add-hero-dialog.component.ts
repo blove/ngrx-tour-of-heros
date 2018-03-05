@@ -42,11 +42,9 @@ export class AddHeroDialogComponent implements OnInit {
       name: ['', Validators.required]
     });
 
-    // TODO: unsubscribe
     this.powersService.getPowers()
       .subscribe(powers => this.powers = powers);
 
-    // TODO: unsubscribe
     this.filteredCharacters = this.form.get('name')
       .valueChanges
       .pipe(
