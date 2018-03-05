@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { Observable } from "rxjs/Observable";
-import { filter, map, switchMap } from "rxjs/operators";
+import { filter, map, switchMap, withLatestFrom } from "rxjs/operators";
 
 import { Power } from "../../../core/models/power.model";
 import { PowersService } from "../../../core/services/powers.service";
@@ -33,12 +33,9 @@ export class PowerComponent implements OnInit {
 
     this.heroes = this.power
       .pipe(
-        switchMap(power => this.heroesService.getHeroes()
-          .pipe(
-            map(heroes => heroes.filter(hero => hero.powers.indexOf(power.id) > -1))
-          )
-        )
-      )
+        withLatestFrom(this.heroesService.getHeroes()),
+        map(([power, heroes]) => heroes.filter(hero => hero.powers.indexOf(power.id) > -1))
+      );
   }
 
 }
