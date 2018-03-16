@@ -10,6 +10,7 @@ import { AppEffects } from "./app.effects";
 import { appMetaReducers, appReducer } from "./app.reducer";
 import { PowersEffects } from "./powers/effects/powers";
 import * as fromPowers from "./powers/reducers";
+import { ErrorEffects } from "./shared/effects/error";
 import { SnackbarEffects } from "./shared/effects/snackbar";
 import { CustomSerializer } from "./shared/utils";
 
@@ -24,9 +25,8 @@ import { CustomSerializer } from "./shared/utils";
     StoreModule.forFeature('powers', fromPowers.reducers),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
-      AppEffects
-    ]),
-    EffectsModule.forFeature([
+      AppEffects,
+      ErrorEffects,
       SnackbarEffects,
       PowersEffects,
     ]),

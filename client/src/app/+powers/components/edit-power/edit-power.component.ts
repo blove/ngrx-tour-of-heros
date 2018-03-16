@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 
 import { Power } from "../../../core/models/power.model";
-import { debounceTime } from "rxjs/operators";
 
 @Component({
   selector: 'app-edit-power',
@@ -32,7 +32,8 @@ export class EditPowerComponent implements OnChanges, OnInit {
   ngOnInit() {
     this.form.valueChanges
       .pipe(
-        debounceTime(500)
+        debounceTime(500),
+        distinctUntilChanged((prev: Power, next: Power) => prev.name === next.name)
       )
       .subscribe(value => {
         if (!this.form.valid) {

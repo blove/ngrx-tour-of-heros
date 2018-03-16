@@ -39,7 +39,7 @@ export class CharacterComponent implements OnInit {
         mergeMap(hero => forkJoin(
           hero.powers.map(power => this.powersService.getPower(power))
         ))
-      )
+      );
   }
 
 }

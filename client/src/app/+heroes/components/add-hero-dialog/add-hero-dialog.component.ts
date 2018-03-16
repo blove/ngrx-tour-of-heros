@@ -1,17 +1,17 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatAutocompleteSelectedEvent, MatDialogRef } from "@angular/material";
-
-import { Observable } from "rxjs/Observable";
-import { debounceTime, filter, map, switchMap } from "rxjs/operators";
 import 'rxjs/add/observable/of';
 
-import { HeroesService } from "../../../core/services/heroes.service";
-import { Power } from "../../../core/models/power.model";
-import { PowersService } from "../../../core/services/powers.service";
-import { Hero } from "../../../core/models/hero.model";
+import { Observable } from "rxjs/Observable";
+import { debounceTime, distinctUntilChanged, filter, map, switchMap } from "rxjs/operators";
 import { Character } from "../../../core/models/character.model";
+import { Hero } from "../../../core/models/hero.model";
+import { Power } from "../../../core/models/power.model";
 import { CharactersService } from "../../../core/services/characters.service";
+
+import { HeroesService } from "../../../core/services/heroes.service";
+import { PowersService } from "../../../core/services/powers.service";
 
 @Component({
   templateUrl: './add-hero-dialog.component.html',
@@ -42,15 +42,14 @@ export class AddHeroDialogComponent implements OnInit {
       name: ['', Validators.required]
     });
 
-    // TODO: unsubscribe
     this.powersService.getPowers()
       .subscribe(powers => this.powers = powers);
 
-    // TODO: unsubscribe
     this.filteredCharacters = this.form.get('name')
       .valueChanges
       .pipe(
         debounceTime(500),
+        distinctUntilChanged(),
         switchMap(value => this.filter(value))
       );
   }

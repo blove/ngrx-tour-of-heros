@@ -12,8 +12,7 @@ export class SnackbarOpen implements Action {
     message: string,
     action?: string,
     config?: MatSnackBarConfig
-  }) {
-  }
+  }) { }
 
 }
 
