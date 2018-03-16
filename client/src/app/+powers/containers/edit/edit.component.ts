@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 
@@ -9,38 +9,41 @@ import { PowersService } from "../../../core/services/powers.service";
 import { switchMap } from "rxjs/operators";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  selector: "app-edit",
+  templateUrl: "./edit.component.html",
+  styleUrls: ["./edit.component.scss"]
 })
 export class EditComponent implements OnInit {
-
   power: Observable<Power>;
 
   // TODO: use store instead of service
   constructor(
     private activatedRoute: ActivatedRoute,
     private powersService: PowersService,
-    private snackBar: MatSnackBar) {
-  }
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     // TODO: dispatch action to load power
-    this.power = this.activatedRoute.paramMap
-      .pipe(
-        switchMap(paramMap => this.powersService.getPower(paramMap.get('id')))
-      );
+    this.power = this.activatedRoute.paramMap.pipe(
+      switchMap(paramMap => this.powersService.getPower(+paramMap.get("id")))
+    );
   }
 
   powerChange(power: Power) {
     // TODO: dispatch action to update power
     // TODO: route back to index??
-    this.powersService.updatePower(power)
-      .subscribe(() => {
-        this.snackBar.open('Power Updated', 'Success', {
+    this.powersService.updatePower(power).subscribe(
+      () => {
+        this.snackBar.open("Power Updated", "Success", {
           duration: 2000
         });
-      });
+      },
+      error => {
+        this.snackBar.open("Update Failed", "#fail", {
+          duration: 2000
+        });
+      }
+    );
   }
-
 }
