@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "serve": "json-server --watch db.json --static ./static"
+    "serve": "json-server --watch db.json --static ./static",
+    "serve-with-delay": "json-server --watch db.json --static ./static --delay 2000"
   },
   "dependencies": {
     "json-server": "^0.12.1"

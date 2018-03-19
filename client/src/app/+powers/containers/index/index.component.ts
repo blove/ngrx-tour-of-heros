@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from "@ngrx/store";
+import { Component, OnInit } from "@angular/core";
+import { Store, select } from "@ngrx/store";
 
 import { Observable } from "rxjs/Observable";
 import { Power } from "../../../core/models/power.model";
-import { AddPowerDialogOpen, DeletePower, LoadPowers } from "../../../state/powers/actions/powers";
-import { getAllPowers, isPowerLoading, PowersState } from "../../../state/powers/reducers";
+import {
+  AddPowerDialogOpen,
+  DeletePower,
+  LoadPowers
+} from "../../../state/powers/actions/powers";
+import { getAllPowers, PowersState } from "../../../state/powers/reducers";
 
 @Component({
-  selector: 'app-index',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  selector: "app-index",
+  templateUrl: "./index.component.html",
+  styleUrls: ["./index.component.scss"]
 })
 export class IndexComponent implements OnInit {
-
-  loading: Observable<boolean>;
-
   powers: Observable<Array<Power>>;
 
-  constructor(private store: Store<PowersState>) {
-  }
+  constructor(private store: Store<PowersState>) {}
 
   ngOnInit() {
-    this.loading = this.store.select(isPowerLoading);
-    this.powers = this.store.select(getAllPowers);
+    this.powers = this.store.pipe(select(getAllPowers));
     this.store.dispatch(new LoadPowers());
   }
 
@@ -33,5 +32,4 @@ export class IndexComponent implements OnInit {
   delete(power: Power) {
     this.store.dispatch(new DeletePower(power));
   }
-
 }

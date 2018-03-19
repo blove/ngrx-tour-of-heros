@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material";
 import { ActivatedRoute } from "@angular/router";
-import { Store } from "@ngrx/store";
+import { Store, select } from "@ngrx/store";
 
 import { Observable } from "rxjs/Observable";
 import { first, map, switchMap, tap } from "rxjs/operators";
@@ -44,7 +44,7 @@ export class EditComponent implements OnInit {
           }
         });
       }),
-      switchMap(() => this.store.select(getSelectedPower))
+      switchMap(() => this.store.pipe(select(getSelectedPower)))
     );
   }
 

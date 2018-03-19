@@ -14,11 +14,11 @@ export const reducers = {
   powers: fromPowers.reducer
 };
 
-export const getPowersState = createFeatureSelector<PowersState>('powers');
+export const getPowersState = createFeatureSelector<PowersState>("powers");
 
 export const getPowersEntityState = createSelector(
   getPowersState,
-  (state) => state.powers
+  state => state.powers
 );
 
 export const {
@@ -37,9 +37,4 @@ export const getSelectedPower = createSelector(
   getPowerEntities,
   getSelectedPowerId,
   (entities, selectedPowerId) => selectedPowerId && entities[selectedPowerId]
-);
-
-export const isPowerLoading = createSelector(
-  getPowersEntityState,
-  fromPowers.isLoading
 );

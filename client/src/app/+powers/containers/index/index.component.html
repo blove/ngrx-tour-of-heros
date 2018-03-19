@@ -5,9 +5,6 @@
       Add Power
     </button>
   </div>
-  <app-powers
-    [loading]="loading | async"
-    [powers]="powers | async"
-    (delete)="delete($event)">
+  <app-powers [powers]="powers | async" (delete)="delete($event)">
   </app-powers>
 </app-layout>
