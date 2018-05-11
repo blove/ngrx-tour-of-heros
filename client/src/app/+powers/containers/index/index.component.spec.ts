@@ -13,6 +13,7 @@ import { StateModule } from "../../../state/state.module";
 import { PowersComponent } from "../../components/powers/powers.component";
 
 import { IndexComponent } from './index.component';
+import { HeroesService } from "../../../core/services/heroes.service";
 
 describe('IndexComponent', () => {
   let component: IndexComponent;
@@ -38,7 +39,8 @@ describe('IndexComponent', () => {
         StateModule
       ],
       providers: [
-        PowersService
+        PowersService,
+        HeroesService
       ]
     })
       .compileComponents();
