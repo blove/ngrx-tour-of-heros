@@ -1,3 +1,6 @@
+import { HeroesState } from './../../../state/heroes/reducers/index';
+import { Store } from '@ngrx/store';
+import { AddHero } from './../../../state/heroes/actions/heroes';
 import { Component, HostListener, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatAutocompleteSelectedEvent, MatDialogRef } from "@angular/material";
@@ -40,7 +43,8 @@ export class AddHeroDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private heroesService: HeroesService,
     private matDialogRef: MatDialogRef<AddHeroDialogComponent>,
-    private powersService: PowersService
+    private powersService: PowersService,
+    private store: Store<HeroesState>
   ) {}
 
   ngOnInit() {
@@ -102,7 +106,8 @@ export class AddHeroDialogComponent implements OnInit {
     hero.powers = this.selectedPowers.map(power => power.id);
 
     // TODO: dispatch action to store
-    this.heroesService.createHero(hero).subscribe(() => this.close());
+    // this.heroesService.createHero(hero).subscribe(() => this.close());
+    this.store.dispatch(new AddHero(hero));
   }
 
   togglePower(power: Power) {

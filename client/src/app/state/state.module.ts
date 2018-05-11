@@ -1,3 +1,4 @@
+
 import {
   ModuleWithProviders,
   NgModule,
@@ -16,7 +17,9 @@ import { environment } from "../../environments/environment";
 import { SharedModule } from "../shared/shared.module";
 import { AppEffects } from "./app.effects";
 import { appMetaReducers, appReducer } from "./app.reducer";
+import { HerosEffects } from './heroes/effects/heroes';
 import { PowersEffects } from "./powers/effects/powers";
+import * as fromHeroes from "./heroes/reducers";
 import * as fromPowers from "./powers/reducers";
 import { ErrorEffects } from "./shared/effects/error";
 import { SnackbarEffects } from "./shared/effects/snackbar";
@@ -31,11 +34,13 @@ import { CustomSerializer } from "./shared/utils";
       metaReducers: appMetaReducers
     }),
     StoreModule.forFeature("powers", fromPowers.reducers),
+    StoreModule.forFeature("heroes", fromHeroes.reducers),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
       AppEffects,
       ErrorEffects,
       SnackbarEffects,
+      HerosEffects,
       PowersEffects
     ]),
     !environment.production ? StoreDevtoolsModule.instrument() : []

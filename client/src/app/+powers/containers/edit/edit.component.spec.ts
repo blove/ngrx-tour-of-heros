@@ -12,6 +12,7 @@ import { SharedModule } from "../../../shared/shared.module";
 import { StateModule } from "../../../state/state.module";
 import { EditPowerComponent } from "../../components/edit-power/edit-power.component";
 import { EditComponent } from "./edit.component";
+import { HeroesService } from "../../../core/services/heroes.service";
 
 class ActivatedRouteStub {
   paramMap: Observable<Map<string, string>>;
@@ -46,7 +47,8 @@ describe('EditComponent', () => {
           provide: ActivatedRoute,
           useClass: ActivatedRouteStub
         },
-        PowersService
+        PowersService,
+        HeroesService
       ]
     })
       .compileComponents();
