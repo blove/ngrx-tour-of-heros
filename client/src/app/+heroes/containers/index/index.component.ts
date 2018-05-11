@@ -1,3 +1,4 @@
+import { DeleteHero } from './../../../state/heroes/actions/heroes';
 
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
@@ -44,6 +45,7 @@ export class IndexComponent implements OnInit {
 
     // this.heroesService.deleteHero(hero)
     //  .subscribe(() => this.heroes = this.heroesService.getHeroes());
+    this.store.dispatch(new DeleteHero(hero));
   }
 
 }
