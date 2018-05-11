@@ -135,6 +135,18 @@ export class PowersEffects {
     );
 
   @Effect()
+  deletePowerSuccess: Observable<Action> = this.actions
+    .ofType<DeletePowerSuccess>(DELETE_POWER_SUCCESS)
+    .pipe(
+      map(() =>
+        new SnackbarOpen({
+          message: "Power Deleted",
+          action: "Success"
+        })
+      )
+    );
+
+  @Effect()
   loadPowers: Observable<Action> = this.actions
     .ofType<LoadPowers>(LOAD_POWERS)
     .pipe(
